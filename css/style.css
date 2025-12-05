@@ -24,6 +24,24 @@ body{
   -webkit-text-size-adjust:100%;
 }
 
+/* Skip link for keyboard users */
+.skip-link{
+  position:fixed;
+  left:8px;
+  top:8px;
+  background:#fff;
+  color:#0f1724;
+  padding:8px 10px;
+  border-radius:6px;
+  z-index:1000;
+  transform:translateY(-120%);
+  transition:transform .18s ease;
+  text-decoration:none;
+  font-weight:600;
+  box-shadow:0 6px 18px rgba(2,6,23,0.06);
+}
+.skip-link:focus{ transform:translateY(0); outline:3px solid rgba(11,120,209,0.12); }
+
 /* Fluid type helpers */
 h1,h2,h3,h4{line-height:1.2;margin:0 0 10px}
 h2{font-size:clamp(1.2rem, 2.2vw, 1.6rem)}
@@ -43,6 +61,7 @@ h3{font-size:clamp(1rem, 1.6vw, 1.1rem)}
   position:sticky;
   top:0;
   z-index:80;
+  transition: background .18s ease, box-shadow .18s ease, border-color .18s ease;
 }
 .header-inner{
   display:flex;
@@ -69,7 +88,8 @@ h3{font-size:clamp(1rem, 1.6vw, 1.1rem)}
   font-size:0.95rem;
   white-space:nowrap;
 }
-.nav a:hover{background:rgba(11,120,209,0.06)}
+.nav a:hover,
+.nav a:focus{background:rgba(11,120,209,0.06)}
 .btn-outline{border:1px solid rgba(11,120,209,0.12);padding:7px 10px}
 
 /* MOBILE NAV BUTTON */
@@ -81,6 +101,7 @@ h3{font-size:clamp(1rem, 1.6vw, 1.1rem)}
   border-radius:8px;
   font-size:18px;
   cursor:pointer;
+  min-width:44px; min-height:44px;
 }
 
 /* HERO */
@@ -139,16 +160,21 @@ h3{font-size:clamp(1rem, 1.6vw, 1.1rem)}
   display:inline-flex;
   align-items:center;
   gap:8px;
-  padding:6px 10px;
+  padding:12px 14px;        /* larger hit area */
+  min-width:56px;
   border-radius:999px;
   border:1px solid rgba(0,0,0,0.08);
   background:transparent;
   cursor:pointer;
   font-weight:700;
   color:inherit;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color: transparent;
+  font-size:0.98rem;
 }
-.lang-toggle .chev{opacity:0.9}
+.lang-toggle .chev{opacity:0.9; transition:transform .16s ease}
 
+/* menu */
 .lang-menu{
   position:absolute;
   right:0;
@@ -161,23 +187,26 @@ h3{font-size:clamp(1rem, 1.6vw, 1.1rem)}
   padding:8px;
   list-style:none;
   margin:0;
-  z-index:220;
+  z-index:900; /* above mobile nav */
+  transform-origin:top right;
+  transition:opacity .12s ease, transform .12s ease;
 }
+.lang-menu[hidden]{display:none !important; opacity:0; transform:scale(.995) translateY(-6px);}
 
-/* Hide by default via [hidden] in HTML; CSS keeps layout */
-.lang-menu[hidden]{display:none}
-
+/* items */
 .lang-item{
   display:flex;
   align-items:center;
   gap:10px;
-  padding:8px 10px;
+  padding:12px 14px; /* finger-friendly */
   text-decoration:none;
   color:inherit;
   border-radius:8px;
   font-weight:600;
+  font-size:1rem;
 }
-.lang-item:hover{background:rgba(11,120,209,0.05)}
+.lang-item:hover,
+.lang-item:focus{background:rgba(11,120,209,0.05)}
 .lang-item.active{background:rgba(11,120,209,0.12);border-radius:8px}
 
 /* Flags (embedded SVG data URLs) */
@@ -185,14 +214,14 @@ h3{font-size:clamp(1rem, 1.6vw, 1.1rem)}
   width:18px;height:18px;border-radius:3px;display:inline-block;background-size:cover;
 }
 .flag.en{
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 30'><clipPath id='t'><path d='M30,15H60V30zv0H30zM0,0H30V15z'/></clipPath><path d='M0,0H60V30H0z' fill='%23012169'/><path d='M0,0L60,30M60,0L0,30' stroke='%23fff' stroke-width='6'/><path d='M0,0L60,30M60,0L0,30' clip-path='url(%23t)' stroke='%23C8102E' stroke-width='4'/><path d='M30,0v30M0,15h60' stroke='%23fff' stroke-width='10'/><path d='M30,0v30M0,15h60' stroke='%23C8102E' stroke-width='6'/></svg>");
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 30'><path fill='%23012169' d='M0 0h60v30H0z'/><path stroke='%23fff' stroke-width='6' d='M0 0L60 30M60 0L0 30'/><path stroke='%23C8102E' stroke-width='4' d='M0 0L60 30M60 0L0 30' clip-path='url(%23t)'/><path stroke='%23fff' stroke-width='10' d='M30 0v30M0 15h60'/><path stroke='%23C8102E' stroke-width='6' d='M30 0v30M0 15h60'/></svg>");
 }
 .flag.cz{
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 30'><path d='M0 0h60v30H0z' fill='%23fff'/><path d='M0 15h60v15H0z' fill='%23d7141a'/><path d='M0 0l30 15L0 30z' fill='%2311457e'/></svg>");
 }
 
 /* ============================
-   RESPONSIVE BEHAVIOR
+   MOBILE / RESPONSIVE
    ============================ */
 
 /* MEDIUM SCREENS */
@@ -210,10 +239,11 @@ h3{font-size:clamp(1rem, 1.6vw, 1.1rem)}
   .brand .tagline{font-size:0.78rem}
   .nav-toggle{display:inline-flex}
 
-  /* Hide normal nav, use mobile panel */
+  /* Hide normal nav on small screens (panel controlled by .nav-open) */
   .nav{display:none}
   .nav.nav-open{display:flex;flex-direction:column}
 
+  /* mobile nav panel: off-canvas with translateX for smooth animation */
   .nav{
     position:fixed;
     right:0;
@@ -226,18 +256,16 @@ h3{font-size:clamp(1rem, 1.6vw, 1.1rem)}
     box-shadow:-8px 0 30px rgba(2,6,23,0.12);
     z-index:300;
     transform:translateX(105%);
-    transition:transform .28s ease;
+    transition:transform .28s cubic-bezier(.22,.9,.32,1);
     gap:12px;
   }
-
   .nav.nav-open{transform:translateX(0)}
   .nav a{display:block;padding:12px 10px;margin:6px 0;border-radius:8px}
 
-  /* language dropdown: adapt to mobile: position left-of-screen */
-  .lang-dropdown{margin-right:0}
+  /* language dropdown: full-width under header */
   .lang-menu{
-    right:auto;
     left:8px;
+    right:auto;
     top:56px;
     width:calc(100% - 16px);
     max-width:none;
@@ -258,5 +286,50 @@ h3{font-size:clamp(1rem, 1.6vw, 1.1rem)}
   .projects .grid{grid-template-columns:repeat(3,1fr)}
 }
 
-/* ACCESSIBILITY */
-a:focus, button:focus{outline:3px solid rgba(11,120,209,0.12);outline-offset:3px}
+/* header scrolled state */
+.site-header.scrolled{
+  background: #ffffff;
+  color: #0f1724;
+  border-bottom-color: rgba(15,23,42,0.06);
+  box-shadow: 0 6px 20px rgba(2,6,23,0.06);
+}
+.site-header.scrolled .brand h1,
+.site-header.scrolled .brand .tagline,
+.site-header.scrolled .nav a,
+.site-header.scrolled .lang-toggle{
+  color: #0f1724;
+}
+
+/* hide hamburger while panel open */
+.nav-toggle.hidden{ display:none !important; }
+
+/* inside nav close button (injected by JS) */
+.nav .nav-close {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  border:0;
+  background:transparent;
+  padding:8px 10px;
+  font-weight:700;
+  color:inherit;
+  cursor:pointer;
+  border-radius:8px;
+}
+.nav .nav-close:focus{ outline:3px solid rgba(11,120,209,0.12); outline-offset:3px; }
+
+/* small visual for chevron rotation when menu open */
+.lang-dropdown.open .chev{ transform: rotate(180deg); }
+
+/* focus-visible for keyboard */
+:focus{outline:none}
+:focus-visible{outline:3px solid rgba(11,120,209,0.12); outline-offset:3px}
+
+/* small compatibility */
+[hidden]{display:none !important}
+
+/* reduce motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *{animation-duration:0s !important; transition-duration:0s !important; scroll-behavior:auto !important}
+}
