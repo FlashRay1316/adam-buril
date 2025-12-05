@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="cs">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -13,30 +13,31 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="css/style.css">
+  <!-- note css path goes up one level -->
+  <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
   <header class="site-header">
     <div class="container header-inner">
       <div class="brand">
         <h1>Bc. Adam Buřil</h1>
-        <p class="tagline">Structural engineer · Civil project manager · Student</p>
+        <p class="tagline">Statika · Projektový inženýr · Student</p>
       </div>
 
       <!-- language switcher -->
-      <div class="lang-switch" aria-hidden="false" title="Language">
+      <div class="lang-switch" aria-hidden="false" title="Jazyk">
         <a href="/adam-buril/" hreflang="en" class="lang-link">EN</a>
         <a href="/adam-buril/cs/" hreflang="cs" class="lang-link">CZ</a>
       </div>
 
       <!-- mobile hamburger button -->
-      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Přepnout menu" aria-expanded="false">☰</button>
 
-      <nav class="nav" aria-label="Main navigation">
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
-        <a class="btn-outline" href="cv/CV-Adam-Buril.pdf" target="_blank" rel="noopener">View CV</a>
+      <nav class="nav" aria-label="Hlavní navigace">
+        <a href="#about">O mně</a>
+        <a href="#projects">Projekty</a>
+        <a href="#contact">Kontakt</a>
+        <a class="btn-outline" href="../cv/CV-Adam-Buril-CS.pdf" target="_blank" rel="noopener">Zobrazit CV</a>
       </nav>
     </div>
   </header>
@@ -45,55 +46,55 @@
     <section class="hero">
       <div class="container hero-grid">
         <div class="hero-text">
-          <h2>Hello — I’m <span class="accent">Adam Buřil</span></h2>
-          <p>Civil engineering student at the Faculty of Civil Engineering, CTU in Prague, specializing in structural engineering of building structures. Below are some of my projects and contact info.</p>
+          <h2>Ahoj — jsem <span class="accent">Adam Buřil</span></h2>
+          <p>Student stavebního inženýrství na ČVUT v Praze, specializace statika staveb. Níže naleznete mé projekty a kontaktní údaje.</p>
           <p class="hero-actions">
-            <a class="btn-primary" href="cv/CV-Adam-Buril.pdf" target="_blank" rel="noopener">View my CV</a>
-            <a class="btn-ghost" href="#projects">See projects</a>
+            <a class="btn-primary" href="../cv/CV-Adam-Buril-CS.pdf" target="_blank" rel="noopener">Zobrazit CV</a>
+            <a class="btn-ghost" href="#projects">Projekty</a>
           </p>
         </div>
 
         <div class="hero-image">
           <img 
-            src="images/me.jpg"
-            srcset="images/me.jpg 320w, images/me.jpg 480w, images/me.jpg 800w"
+            src="../images/me.jpg"
+            srcset="../images/me.jpg 320w, ../images/me.jpg 480w, ../images/me.jpg 800w"
             sizes="(max-width: 600px) 160px, (max-width: 900px) 220px, 360px"
-            alt="Adam Buřil — profile photo" loading="lazy">
+            alt="Adam Buřil — fotografie" loading="lazy">
         </div>
       </div>
     </section>
 
     <section id="about" class="container card about">
-      <h3>About me</h3>
-      <p>I am a civil engineering student at the Faculty of Civil Engineering, CTU in Prague, specializing in structural engineering of building structures. I focus on the design of reinforced concrete and masonry structures, the development of computational models, and their practical realization. I also have experience with project coordination and assisting in project management tasks, ensuring smooth workflow and communication throughout the design and implementation phases.</p>
+      <h3>O mně</h3>
+      <p>Jsem student stavebního inženýrství na Fakultě stavební ČVUT v Praze, se zaměřením na statiku staveb. Zaměřuji se na návrh železobetonových a zděných konstrukcí, vývoj výpočetních modelů a jejich praktickou realizaci. Mám také zkušenost s koordinací projektů a asistencí v projektovém řízení, zajišťuji plynulou komunikaci a realizaci návrhů v průběhu projektu.</p>
     </section>
 
     <section id="projects" class="container projects card">
-      <h3>Selected projects</h3>
+      <h3>Vybrané projekty</h3>
       <div class="grid">
         <article class="project">
-          <h4>Project One</h4>
-          <p>Short summary — what it does and what techniques you used.</p>
-          <a href="#" class="project-link">View</a>
+          <h4>Projekt jedna</h4>
+          <p>Krátký popis — co projekt řeší a jaké postupy či nástroje byly použity.</p>
+          <a href="#" class="project-link">Zobrazit</a>
         </article>
 
         <article class="project">
-          <h4>Project Two</h4>
-          <p>Short summary — what it does and what techniques you used.</p>
-          <a href="#" class="project-link">View</a>
+          <h4>Projekt dvě</h4>
+          <p>Krátký popis — co projekt řeší a jaké postupy či nástroje byly použity.</p>
+          <a href="#" class="project-link">Zobrazit</a>
         </article>
 
         <article class="project">
-          <h4>Project Three</h4>
-          <p>Short summary — what it does and what techniques you used.</p>
-          <a href="#" class="project-link">View</a>
+          <h4>Projekt tři</h4>
+          <p>Krátký popis — co projekt řeší a jaké postupy či nástroje byly použity.</p>
+          <a href="#" class="project-link">Zobrazit</a>
         </article>
       </div>
     </section>
 
     <section id="contact" class="container card contact">
-      <h3>Contact</h3>
-      <p>If you'd like to get in touch, email me at <a href="mailto:adam.buril@seznam.cz">adam.buril@seznam.cz</a> or connect on <a href="https://www.linkedin.com/in/adam-bu%C5%99il-726682372/" target="_blank" rel="noopener">LinkedIn</a>.</p>
+      <h3>Kontakt</h3>
+      <p>Máte-li zájem se spojit, napište mi na <a href="mailto:adam.buril@seznam.cz">adam.buril@seznam.cz</a> nebo se spojte přes <a href="https://www.linkedin.com/in/adam-bu%C5%99il-726682372/" target="_blank" rel="noopener">LinkedIn</a>.</p>
     </section>
   </main>
 
@@ -107,7 +108,7 @@
     // set current year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // mobile nav toggle + accessibility attributes
+    // mobile nav toggle
     const navToggle = document.getElementById('nav-toggle');
     const nav = document.querySelector('.nav');
 
