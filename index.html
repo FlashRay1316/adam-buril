@@ -5,11 +5,9 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Bc. Adam Buřil — Portfolio</title>
 
-  <!-- SEO language alternates -->
   <link rel="alternate" hreflang="en" href="/adam-buril/">
   <link rel="alternate" hreflang="cs" href="/adam-buril/cs/">
 
-  <!-- Google font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
@@ -23,10 +21,27 @@
         <p class="tagline">Structural engineer · Civil project manager · Student</p>
       </div>
 
-      <!-- language switcher -->
-      <div class="lang-switch" aria-hidden="false" title="Language">
-        <a href="/adam-buril/" hreflang="en" class="lang-link">EN</a>
-        <a href="/adam-buril/cs/" hreflang="cs" class="lang-link">CZ</a>
+      <!-- Language dropdown (desktop + mobile friendly) -->
+      <div class="lang-dropdown" id="lang-dropdown">
+        <button id="lang-toggle" class="lang-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="lang-menu">
+          <!-- visible label -->
+          <span class="flag en" aria-hidden="true"></span>
+          <span class="lang-label">EN</span>
+          <svg class="chev" viewBox="0 0 10 6" width="10" height="6" aria-hidden="true"><path d="M1 1l4 3 4-3" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+        </button>
+
+        <ul id="lang-menu" class="lang-menu" role="menu" aria-labelledby="lang-toggle" hidden>
+          <li role="none">
+            <a role="menuitem" href="/adam-buril/" class="lang-item active" hreflang="en">
+              <span class="flag en" aria-hidden="true"></span> English — EN
+            </a>
+          </li>
+          <li role="none">
+            <a role="menuitem" href="/adam-buril/cs/" class="lang-item" hreflang="cs">
+              <span class="flag cz" aria-hidden="true"></span> Čeština — CZ
+            </a>
+          </li>
+        </ul>
       </div>
 
       <!-- mobile hamburger button -->
@@ -36,7 +51,7 @@
         <a href="#about">About</a>
         <a href="#projects">Projects</a>
         <a href="#contact">Contact</a>
-        <a class="btn-outline" href="cv/CV - Adam Buřil.pdf" target="_blank" rel="noopener">View CV</a>
+        <a class="btn-outline" href="cv/CV - Adam Buril.pdf" target="_blank" rel="noopener">View CV</a>
       </nav>
     </div>
   </header>
@@ -48,7 +63,7 @@
           <h2>Hello — I’m <span class="accent">Adam Buřil</span></h2>
           <p>Civil engineering student at the Faculty of Civil Engineering, CTU in Prague, specializing in structural engineering of building structures. Below are some of my projects and contact info.</p>
           <p class="hero-actions">
-            <a class="btn-primary" href="cv/CV - Adam Buřil.pdf" target="_blank" rel="noopener">View my CV</a>
+            <a class="btn-primary" href="cv/CV - Adam Buril.pdf" target="_blank" rel="noopener">View my CV</a>
             <a class="btn-ghost" href="#projects">See projects</a>
           </p>
         </div>
@@ -104,20 +119,81 @@
   </footer>
 
   <script>
-    // set current year
+    // footer year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // mobile nav toggle + accessibility attributes
+    // mobile nav toggle
     const navToggle = document.getElementById('nav-toggle');
     const nav = document.querySelector('.nav');
-
-    navToggle.addEventListener('click', () => {
-      const open = nav.classList.toggle('nav-open');
-      navToggle.classList.toggle('open');
-      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    navToggle?.addEventListener('click', () => {
+      const expanded = navToggle.classList.toggle('open');
+      nav.classList.toggle('nav-open');
+      navToggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
     });
 
-    // close mobile nav when a link is clicked
+    // LANGUAGE DROPDOWN: open/close, keyboard, outside click
+    (function() {
+      const dropdown = document.getElementById('lang-dropdown');
+      const toggle = document.getElementById('lang-toggle');
+      const menu = document.getElementById('lang-menu');
+      const menuItems = menu.querySelectorAll('[role="menuitem"]');
+
+      function openMenu() {
+        menu.hidden = false;
+        dropdown.classList.add('open');
+        toggle.setAttribute('aria-expanded', 'true');
+        // focus first item for keyboard users
+        menuItems[0]?.focus();
+      }
+      function closeMenu() {
+        menu.hidden = true;
+        dropdown.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.focus();
+      }
+
+      // toggle on click
+      toggle.addEventListener('click', (e) => {
+        if (menu.hidden) openMenu(); else closeMenu();
+      });
+
+      // handle keyboard on toggle
+      toggle.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openMenu();
+        }
+      });
+
+      // allow keyboard navigation within menu
+      menu.addEventListener('keydown', (e) => {
+        const current = Array.from(menuItems).indexOf(document.activeElement);
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          const next = (current + 1) % menuItems.length;
+          menuItems[next].focus();
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          const prev = (current - 1 + menuItems.length) % menuItems.length;
+          menuItems[prev].focus();
+        } else if (e.key === 'Escape') {
+          closeMenu();
+        }
+      });
+
+      // close when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!dropdown.contains(e.target)) closeMenu();
+      });
+
+      // close on focusout (for accessibility)
+      dropdown.addEventListener('focusout', (e) => {
+        // if focus moves outside the dropdown entirely, close it
+        if (!dropdown.contains(e.relatedTarget)) closeMenu();
+      });
+    })();
+
+    // close mobile nav when a nav link is clicked
     document.querySelectorAll('.nav a').forEach(a => {
       a.addEventListener('click', () => {
         if (nav.classList.contains('nav-open')) {
