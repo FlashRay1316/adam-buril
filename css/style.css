@@ -1,5 +1,3 @@
-/* Simple modern style for a personal page */
-/* Use Inter font from Google (declared in HTML) */
 :root{
   --max-width:1000px;
   --accent:#0b78d1;
@@ -10,6 +8,7 @@
   --gap:18px;
 }
 
+/* Basic reset */
 *{box-sizing:border-box}
 html,body{height:100%}
 body{
@@ -22,10 +21,11 @@ body{
   line-height:1.5;
 }
 
+/* Page container */
 .container{
   max-width:var(--max-width);
   margin:0 auto;
-  padding:24px;
+  padding:18px 16px;
 }
 
 /* Header */
@@ -37,20 +37,31 @@ body{
   backdrop-filter:saturate(120%) blur(6px);
   z-index:50;
 }
-.header-inner{display:flex;align-items:center;justify-content:space-between;gap:18px}
-.brand h1{margin:6px 0;font-size:1.1rem}
-.brand .tagline{margin:0;color:var(--muted);font-size:0.9rem}
+.header-inner{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand h1{margin:6px 0;font-size:1.05rem}
+.brand .tagline{margin:0;color:var(--muted);font-size:0.85rem}
 
-/* nav */
-.nav{display:flex;gap:12px;align-items:center}
+/* Nav links */
+.nav{display:flex;gap:10px;align-items:center}
 .nav a{color:inherit;text-decoration:none;padding:8px 10px;border-radius:8px;font-weight:600;font-size:0.95rem}
 .nav a:hover{background:rgba(11,120,209,0.06)}
 .btn-outline{border:1px solid rgba(11,120,209,0.12);padding:7px 10px}
 
+/* Hamburger button (hidden on large screens) */
+.nav-toggle{
+  display:none;
+  background:transparent;
+  border:1px solid rgba(15,23,42,0.06);
+  padding:8px 10px;
+  border-radius:8px;
+  font-size:18px;
+  cursor:pointer;
+}
+
 /* Hero */
-.hero{padding:36px 0}
+.hero{padding:28px 0}
 .hero-grid{display:grid;grid-template-columns:1fr;gap:20px;align-items:center}
-.hero-text h2{font-size:1.8rem;margin:0 0 10px}
+.hero-text h2{font-size:1.6rem;margin:0 0 10px}
 .accent{color:var(--accent);font-weight:700}
 .hero-text p{color:var(--muted);margin:0 0 12px}
 .hero-actions{margin-top:14px}
@@ -60,18 +71,18 @@ body{
 .btn-primary{background:var(--accent);color:white}
 .btn-ghost{border:1px solid rgba(15,23,42,0.06);color:inherit;margin-left:10px}
 
-/* hero image */
+/* Hero image */
 .hero-image{display:flex;justify-content:center}
 .hero-image img{
   width:220px;height:220px;object-fit:cover;border-radius:18px;border:6px solid #fff;box-shadow:0 8px 30px rgba(2,6,23,0.12);
 }
 
-/* card sections */
+/* Cards / sections */
 .card{
   background:var(--card);
   border-radius:var(--radius);
-  padding:20px;
-  margin-top:20px;
+  padding:18px;
+  margin-top:18px;
   box-shadow:0 8px 24px rgba(2,6,23,0.04);
 }
 .about h3, .projects h3, .contact h3{margin:0 0 10px}
@@ -81,11 +92,52 @@ body{
 .project p{margin:0 0 10px;color:var(--muted)}
 .project-link{font-weight:600;color:var(--accent);text-decoration:none}
 
-/* footer */
-.site-footer{padding:18px 0;margin-top:28px;color:var(--muted);text-align:center;font-size:0.95rem}
+/* Footer */
+.site-footer{padding:18px 0;margin-top:22px;color:var(--muted);text-align:center;font-size:0.95rem}
 
-/* Responsive for larger screens */
-@media(min-width:820px){
+/* Responsive rules */
+
+/* Medium screens */
+@media (max-width: 900px) {
+  .container { padding:16px; }
+  .brand h1 { font-size:1rem; }
+  .hero-text h2 { font-size:1.4rem; }
+  .hero-image img { width:180px; height:180px; }
+  .projects .grid { grid-template-columns:repeat(2, 1fr); gap:12px; }
+}
+
+/* Small screens (mobile) */
+@media (max-width: 640px) {
+  .header-inner{align-items:center}
+  /* show hamburger and hide normal nav by default */
+  .nav-toggle{display:inline-flex}
+  .nav{
+    position:fixed;
+    right:16px;
+    top:68px;
+    flex-direction:column;
+    background:rgba(255,255,255,0.98);
+    padding:10px;
+    border-radius:12px;
+    box-shadow:0 8px 30px rgba(2,6,23,0.08);
+    display:none;
+    z-index:60;
+  }
+  .nav a{display:block;padding:10px 12px;margin:4px 0}
+  .nav.nav-open{display:flex}
+  .nav-toggle.open{background:rgba(11,120,209,0.08)}
+  .hero-grid{grid-template-columns:1fr;gap:18px}
+  .hero-image img{width:160px;height:160px}
+  .projects .grid{grid-template-columns:1fr;gap:12px}
+  .container{padding:14px}
+}
+
+/* Large screens */
+@media (min-width:821px){
   .hero-grid{grid-template-columns:1fr 360px}
   .projects .grid{grid-template-columns:repeat(3,1fr)}
 }
+
+/* Small accessibility tweaks */
+a:focus{outline:3px solid rgba(11,120,209,0.12);outline-offset:3px}
+button:focus{outline:3px solid rgba(11,120,209,0.12);outline-offset:3px}

@@ -18,6 +18,10 @@
         <h1>Bc. Adam Buřil</h1>
         <p class="tagline">Structural engineer · Civil project manager · Student</p>
       </div>
+
+      <!-- Mobile hamburger menu button -->
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation">☰</button>
+
       <nav class="nav">
         <a href="#about">About</a>
         <a href="#projects">Projects</a>
@@ -40,7 +44,11 @@
         </div>
 
         <div class="hero-image">
-          <img src="images/me.jpg" alt="Your Name — profile photo">
+          <img 
+            src="images/me.jpg"
+            srcset="images/me.jpg 320w, images/me.jpg 480w, images/me.jpg 800w"
+            sizes="(max-width: 600px) 160px, (max-width: 900px) 220px, 360px"
+            alt="Adam Buřil — profile photo">
         </div>
       </div>
     </section>
@@ -52,7 +60,7 @@
         I also have experience with project coordination and assisting in project management tasks, ensuring smooth workflow and communication throughout the design and implementation phases.</p>
     </section>
 
-    <section id="projects" class="container projects">
+    <section id="projects" class="container projects card">
       <h3>Selected projects</h3>
       <div class="grid">
         <article class="project">
@@ -77,7 +85,11 @@
 
     <section id="contact" class="container card contact">
       <h3>Contact</h3>
-      <p>If you'd like to get in touch, email me at <a href="mailto:adam.buril@seznam.cz">adam.buril@seznam.cz</a> or connect on <a href="https://www.linkedin.com/in/adam-bu%C5%99il-726682372/" target="_blank">LinkedIn</a>.</p>
+      <p>If you'd like to get in touch, email me at 
+        <a href="mailto:adam.buril@seznam.cz">adam.buril@seznam.cz</a> 
+        or connect on 
+        <a href="https://www.linkedin.com/in/adam-bu%C5%99il-726682372/" target="_blank">LinkedIn</a>.
+      </p>
     </section>
   </main>
 
@@ -88,8 +100,18 @@
   </footer>
 
   <script>
-    // set current year in footer
+    // Footer year
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobile Navigation Toggle
+    const navToggle = document.getElementById('nav-toggle');
+    const nav = document.querySelector('.nav');
+
+    navToggle?.addEventListener('click', () => {
+      nav.classList.toggle('nav-open');
+      navToggle.classList.toggle('open');
+    });
   </script>
+
 </body>
 </html>
