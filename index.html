@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bc. Adam Buřil — Portfolio</title>
+
+  <!-- Google font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <h1>Bc. Adam Buřil</h1>
+        <p class="tagline">Structural engineer · Civil project manager · Student</p>
+      </div>
+      <nav class="nav">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+        <a class="btn-outline" href="cv/CV - Adam Buřil.pdf" download>Download CV</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-text">
+          <h2>Hello — I’m <span class="accent">Adam Buřil</span></h2>
+          <p>Civil engineering student at the Faculty of Civil Engineering, CTU in Prague, specializing in structural engineering of building structures. Below are some of my projects and contact info.</p>
+          <p class="hero-actions">
+            <a class="btn-primary" href="cv/CV - Adam Buřil.pdf" download>Get my CV</a>
+            <a class="btn-ghost" href="#projects">See projects</a>
+          </p>
+        </div>
+
+        <div class="hero-image">
+          <img src="images/me.jpg" alt="Your Name — profile photo">
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="container card about">
+      <h3>About me</h3>
+      <p>I am a civil engineering student at the Faculty of Civil Engineering, CTU in Prague, specializing in structural engineering of building structures. 
+        I focus on the design of reinforced concrete and masonry structures, the development of computational models, and their practical realization. 
+        I also have experience with project coordination and assisting in project management tasks, ensuring smooth workflow and communication throughout the design and implementation phases.</p>
+    </section>
+
+    <section id="projects" class="container projects">
+      <h3>Selected projects</h3>
+      <div class="grid">
+        <article class="project">
+          <h4>Project One</h4>
+          <p>Short summary — what it does and what tech you used.</p>
+          <a href="#" class="project-link">View</a>
+        </article>
+
+        <article class="project">
+          <h4>Project Two</h4>
+          <p>Short summary — what it does and what tech you used.</p>
+          <a href="#" class="project-link">View</a>
+        </article>
+
+        <article class="project">
+          <h4>Project Three</h4>
+          <p>Short summary — what it does and what tech you used.</p>
+          <a href="#" class="project-link">View</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact" class="container card contact">
+      <h3>Contact</h3>
+      <p>If you'd like to get in touch, email me at <a href="mailto:adam.buril@seznam.cz">adam.buril@seznam.cz</a> or connect on <a href="https://www.linkedin.com/in/adam-bu%C5%99il-726682372/" target="_blank">LinkedIn</a>.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year"></span> Bc. Adam Buřil — Built with concrete</p>
+    </div>
+  </footer>
+
+  <script>
+    // set current year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
